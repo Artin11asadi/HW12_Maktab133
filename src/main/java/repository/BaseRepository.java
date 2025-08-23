@@ -1,4 +1,4 @@
-package repository.Repository;
+package repository;
 
 import model.BaseEntity;
 
@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface BaseRepository<ID, TYPE extends BaseEntity<ID>> {
 
-    public TYPE saveOrUpdate(TYPE type);
+    TYPE saveOrUpdate(TYPE type);
 
-    boolean deleteById(ID id);
+    Boolean deleteById(ID id);
 
     Optional<TYPE> findById(ID id);
 
-    List<TYPE> findAll(ID id);
+    List<TYPE> findAll();
 
 
 }
