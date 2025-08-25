@@ -3,9 +3,11 @@ package service;
 import model.Car;
 import model.Vehicle;
 
-public interface CarService {
+import java.util.List;
 
-    Car carSeatingAbove();
+public interface CarService extends VehicleService<Long, Car> {
+
+    List<Car> carSeatingAbove(int seatingCapacity);
 
 
 }

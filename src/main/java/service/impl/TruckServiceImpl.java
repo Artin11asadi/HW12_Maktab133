@@ -1,24 +1,24 @@
 package service.impl;
 
-import model.Car;
+import model.Truck;
 import model.Vehicle;
-import repository.impl.CarRepositoryImpl;
-import service.CarService;
+import repository.impl.TruckRepositoryImpl;
+import service.TruckService;
 
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
-public class CarServiceImpl extends BaseServiceImpl<Long, Car, CarRepositoryImpl> implements CarService {
+public class TruckServiceImpl extends BaseServiceImpl<Long, Truck, TruckRepositoryImpl> implements TruckService {
 
-    public CarServiceImpl(CarRepositoryImpl repository) {
+    public TruckServiceImpl(TruckRepositoryImpl repository) {
         super(repository);
     }
 
     @Override
-    public List<Car> carSeatingAbove(int seatingCapacity) {
-        return repository.findAll().stream().filter(truck -> truck.getSeatingCapacity() < seatingCapacity).toList();
+    public List<Truck> loadCapacityAbove(int loadCapacity) {
+        return repository.findAll().stream().filter(truck -> truck.getLoadCapacity() > loadCapacity).toList();
     }
 
     @Override

@@ -1,5 +1,8 @@
 package model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Truck extends Vehicle {
 
     private Double loadCapacity;
