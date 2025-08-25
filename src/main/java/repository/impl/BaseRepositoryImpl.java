@@ -8,21 +8,11 @@ import jakarta.persistence.PersistenceException;
 import model.BaseEntity;
 import util.EntityManagerProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BaseRepositoryImpl<ID, TYPE extends BaseEntity<ID>> implements BaseRepository<ID, TYPE> {
+public abstract class BaseRepositoryImpl<ID, TYPE extends BaseEntity<ID>> implements BaseRepository<ID, TYPE> {
 
-    private final Class<TYPE> entityClass;
-
-    public BaseRepositoryImpl(Class<TYPE> entityClass) {
-        this.entityClass = entityClass;
-    }
-
-    protected Class<TYPE> getEntityClass() {
-        return entityClass;
-    }
 
     @Override
     public TYPE saveOrUpdate(TYPE type) {
@@ -50,7 +40,7 @@ public class BaseRepositoryImpl<ID, TYPE extends BaseEntity<ID>> implements Base
 
 
     @Override
-    public Boolean deleteById(ID id) {
+    public boolean deleteById(ID id) {
         EntityManager em = EntityManagerProvider.entityManager.get();
         EntityTransaction transaction = em.getTransaction();
 
@@ -77,46 +67,21 @@ public class BaseRepositoryImpl<ID, TYPE extends BaseEntity<ID>> implements Base
 
     @Override
     public Optional<TYPE> findById(ID id) {
-        EntityManager em = EntityManagerProvider.entityManager.get();
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            TYPE entity = em.find(getEntityClass(), id);
-            return Optional.ofNullable(entity);
+        return Optional.ofNullable(
+                EntityManagerProvider
+                        .entityManager
+                        .get()
+                        .find(getEntityClass(), id)
+        );
 
-        } catch (PersistenceException p) {
-            transaction.rollback();
-            throw new PersistenceException("finding by id failed " + p.getMessage());
-
-        } finally {
-            em.close();
-        }
     }
 
     @Override
     public List<TYPE> findAll() {
-        EntityManager em = EntityManagerProvider.entityManager.get();
-        EntityTransaction transaction = em.getTransaction();
-        int id = 1;
-        List<TYPE> allEntities = new ArrayList<>();
-        try {
-            transaction.begin();
-            while (true) {
-                TYPE entity = em.find(getEntityClass(), id);
-                if (entity == null) {
-                    break;
-                }
-                allEntities.add(entity);
-                id++;
-            }
-            return allEntities;
+        return EntityManagerProvider
+                .entityManager
+                .get()
+                .createQuery("from " + getEntityClass().getName(), getEntityClass()).getResultList();
 
-        } catch (PersistenceException p) {
-            transaction.rollback();
-            throw new PersistenceException("finding all entities failed " + p.getMessage());
-
-        } finally {
-            em.close();
-        }
     }
 }

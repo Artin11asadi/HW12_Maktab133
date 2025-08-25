@@ -1,11 +1,14 @@
 package repository.impl;
 
+import model.BaseEntity;
 import model.Vehicle;
+import repository.VehicleRepository;
 
 
-public class VehicleRepositoryImpl extends BaseRepositoryImpl<Long, Vehicle> {
+public class VehicleRepositoryImpl extends BaseRepositoryImpl<Long, Vehicle> implements VehicleRepository {
 
-    public VehicleRepositoryImpl(Class<Vehicle> entityClass) {
-        super(entityClass);
+    @Override
+    public Class<Vehicle> getEntityClass() {
+        return Vehicle.class;
     }
 }

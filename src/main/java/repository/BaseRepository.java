@@ -9,11 +9,13 @@ public interface BaseRepository<ID, TYPE extends BaseEntity<ID>> {
 
     TYPE saveOrUpdate(TYPE type);
 
-    Boolean deleteById(ID id);
+    boolean deleteById(ID id);
 
     Optional<TYPE> findById(ID id);
 
     List<TYPE> findAll();
+
+    Class<TYPE> getEntityClass();
 
 
 }

@@ -1,4 +1,8 @@
 package repository;
 
-public interface TruckRepository extends VehicleRepository{
+import model.Truck;
+
+public interface TruckRepository extends BaseRepository<Long, Truck>{
+
+
 }
