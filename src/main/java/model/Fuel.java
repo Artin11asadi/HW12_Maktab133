@@ -4,5 +4,7 @@ public enum Fuel {
 
     PETROL,
     GAS,
-    ELECTRICITY
+    DIESEL,
+    ELECTRIC,
+    HYBRID
 }

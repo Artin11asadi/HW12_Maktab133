@@ -5,19 +5,44 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Inheritance
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Vehicle extends BaseEntity<Long> {
 
     private String brand;
     private String model;
     private LocalDate year;
 
-
     @Embedded
-    private Registeration registeration;
+    private Registration registration;
 
     @Enumerated(EnumType.STRING)
     private VehicleStatus vehicleStatus;
+
+    public Registration getRegisteration() {
+        return registration;
+    }
+
+    public Vehicle(String brand, VehicleStatus vehicleStatus, Registration registration, LocalDate year, String model) {
+        this.brand = brand;
+        this.vehicleStatus = vehicleStatus;
+        this.registration = registration;
+        this.year = year;
+        this.model = model;
+    }
+
+    public Vehicle(){}
+
+    public void setRegisteration(Registration registration) {
+        this.registration = registration;
+    }
+
+    public VehicleStatus getVehicleStatus() {
+        return vehicleStatus;
+    }
+
+    public void setVehicleStatus(VehicleStatus vehicleStatus) {
+        this.vehicleStatus = vehicleStatus;
+    }
 
     public String getBrand() {
         return brand;
@@ -42,4 +67,6 @@ public abstract class Vehicle extends BaseEntity<Long> {
     public void setModel(String model) {
         this.model = model;
     }
+
+
 }

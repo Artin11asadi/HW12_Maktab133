@@ -1,15 +1,26 @@
 package model;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDate;
 
 @Embeddable
-public class Registeration {
+public class Registration {
 
     private String plateNumber;
     private LocalDate registrationDate;
+    @Enumerated(value = EnumType.STRING)
     private RegistrationState state;
+
+    public Registration(String plateNumber, RegistrationState state, LocalDate registrationDate) {
+        this.plateNumber = plateNumber;
+        this.state = state;
+        this.registrationDate = registrationDate;
+    }
+
+    public Registration() {}
 
     public String getPlateNumber() {
         return plateNumber;

@@ -15,10 +15,6 @@ public class BaseEntity<ID>{
         return id;
     }
 
-    public void setId(ID id) {
-        this.id = id;
-    }
-
     private Instant createAt;
     private Instant updatedAt;
 
