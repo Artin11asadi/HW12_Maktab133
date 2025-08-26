@@ -18,7 +18,7 @@ public class CarServiceImpl extends BaseServiceImpl<Long, Car, CarRepositoryImpl
 
     @Override
     public List<Car> carSeatingAbove(int seatingCapacity) {
-        return repository.findAll().stream().filter(truck -> truck.getSeatingCapacity() < seatingCapacity).toList();
+        return repository.findAll().stream().filter(car -> car.getSeatingCapacity() > seatingCapacity).toList();
     }
 
     @Override

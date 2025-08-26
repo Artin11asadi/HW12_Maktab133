@@ -1,6 +1,5 @@
 package repository.impl;
 
-import model.BaseEntity;
 import model.Vehicle;
 import repository.VehicleRepository;
 

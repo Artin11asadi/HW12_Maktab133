@@ -1,7 +1,6 @@
 package service;
 
 import model.BaseEntity;
-import model.Vehicle;
 
 import java.util.Map;
 import java.util.OptionalDouble;
